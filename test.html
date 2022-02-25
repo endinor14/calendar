@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script></script>
+</head>
+
+<body>
+  <script>
+
+
+function handleChange(selectObject,month) {
+       var value = selectObject.value;
+      console.log('selectObject',value,month)
+       month=value;
+       console.log('selectObject',value,month)
+     }
+
+
+
+    var date = new Date();
+    var day = date.getDate();
+    let query_month = window.location.search
+    var month = parseInt(query_month) || date.getMonth();
+    var firstDay = new Date(date.getFullYear(), month, 1);
+    var lastDay = new Date(date.getFullYear(), month + 1, 0);
+    var first = firstDay.getDate();
+    var last = lastDay.getDate();
+    /*const date = new Date();
+date.setDate(0); */
+
+    var monthNames = [
+      "Ocak",
+      "Şubat",
+      "Mart",
+      "Nisan",
+      "Mayıs",
+      "Haziran",
+      "Temmuz",
+      "Ağustos",
+      "Eylül",
+      "Ekim",
+      "Kasım",
+      "Aralık",
+    ];
+
+    var calendarBody =
+      "<table style=width:70% height:500 align=center border=10px solid black> <tr><th bgcolor= red colspan='7'>" + monthNames[month] + "</th></tr>";
+    calendarBody +=
+      "<tr align=center bgcolor= #FF0000 > <td style=width:100px >Pazartesi</td> <td style=width:100px >Salı</td> <td style=width:100px>Çarşamba</td> <td style=width:100px>Perşembe</td> <td style=width:100px height:500>Cuma</td> <td style=width:100px>Cumartesi</td> <td style=width:100px>Pazar</td> </tr>";
+
+    let free_days = firstDay.getDay();
+
+    while ((free_days + 6) % 7 > 0) {
+      calendarBody += "<th></th>";
+      free_days--;
+    }
+    while (first <= last) {
+      if ((first - 1 + firstDay.getDay()) % 7 == 0) {
+        calendarBody +=
+          first == day ? "<th bgcolor= #FF0000>" : "<th>" + first + "</th>" + "</tr>";
+      } else {
+        if (first == day) {
+          calendarBody += "<th bgcolor= #FF0000>" + first + "</th>";
+        } else {
+          calendarBody += "<th>" + first + "</th>";
+        }
+      }
+
+      first++;
+    }
+
+    document.write(calendarBody);
+  </script>
+  <select style="" name="months" onchange="handleChange(this,month)" >
+
+    <option value="0">Ocak</option>
+    
+    <option value="1">Şubat</option>
+    
+    <option value="2">Mart</option>
+    
+    <option value="3">Nisan</option>
+    
+    <option value="4">Mayıs</option>
+    
+    <option value="5">Haziran</option>
+    
+    <option value="6">Temmuz</option>
+    
+    <option value="7">Ağustos</option>
+    
+    <option value="8">Eylül</option>
+    
+    <option value="9">Ekim</option>
+    
+    <option value="10">Kasım</option>
+    
+    <option value="11">Aralık</option>
+    
+    <option selected>Ay seçiniz</option>
+    
+    
+    </select>  
+    
+    
+</body>
+<style></style>
+
+</html>
